@@ -50,6 +50,15 @@ func (ev *Event) Validate() error {
 	return nil
 }
 
+// Process the raw event
+func (ev *Event) Process(data []byte) error {
+	err := json.Unmarshal(data, &ev)
+	if err != nil {
+		nc.Publish("network.create.aws.error", data)
+	}
+	return err
+}
+
 // Error the request
 func (ev *Event) Error(err error) {
 	log.Printf("Error: %s", err.Error())

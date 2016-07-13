@@ -28,7 +28,9 @@ func processEvent(data []byte) (*Event, error) {
 }
 
 func eventHandler(m *nats.Msg) {
-	n, err := processEvent(m.Data)
+	var n Event
+
+	err := n.Process(m.Data)
 	if err != nil {
 		nc.Publish("network.create.aws.error", m.Data)
 		return
@@ -39,7 +41,7 @@ func eventHandler(m *nats.Msg) {
 		return
 	}
 
-	err = createNetwork(n)
+	err = createNetwork(&n)
 	if err != nil {
 		n.Error(err)
 		return
