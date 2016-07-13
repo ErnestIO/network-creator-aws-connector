@@ -5,7 +5,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -20,12 +19,6 @@ import (
 
 var nc *nats.Conn
 var natsErr error
-
-func processEvent(data []byte) (*Event, error) {
-	var ev Event
-	err := json.Unmarshal(data, &ev)
-	return &ev, err
-}
 
 func eventHandler(m *nats.Msg) {
 	var n Event
