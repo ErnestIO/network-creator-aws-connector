@@ -24,7 +24,7 @@ var (
 		DatacenterRegion:      "eu-west-1",
 		DatacenterAccessKey:   "key",
 		DatacenterAccessToken: "token",
-		NetworkAWSID:          "subnet-00000000",
+		NetworkAWSID:          "",
 		NetworkSubnet:         "10.0.0.0/16",
 	}
 )
@@ -76,8 +76,8 @@ func TestEvent(t *testing.T) {
 					So(e.DatacenterRegion, ShouldEqual, "eu-west-1")
 					So(e.DatacenterAccessKey, ShouldEqual, "key")
 					So(e.DatacenterAccessToken, ShouldEqual, "token")
-					So(e.NetworkAWSID, ShouldEqual, "subnet-00000000")
-
+					So(e.NetworkAWSID, ShouldEqual, "")
+					So(e.NetworkSubnet, ShouldEqual, "10.0.0.0/16")
 				})
 			})
 
