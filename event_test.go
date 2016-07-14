@@ -21,6 +21,7 @@ var (
 	testEvent = Event{
 		UUID:                  "test",
 		BatchID:               "test",
+		ProviderType:          "aws",
 		DatacenterVPCID:       "vpc-0000000",
 		DatacenterRegion:      "eu-west-1",
 		DatacenterAccessKey:   "key",
@@ -74,6 +75,7 @@ func TestEvent(t *testing.T) {
 				Convey("It should load the correct values", func() {
 					So(e.UUID, ShouldEqual, "test")
 					So(e.BatchID, ShouldEqual, "test")
+					So(e.ProviderType, ShouldEqual, "aws")
 					So(e.DatacenterVPCID, ShouldEqual, "vpc-0000000")
 					So(e.DatacenterRegion, ShouldEqual, "eu-west-1")
 					So(e.DatacenterAccessKey, ShouldEqual, "key")
