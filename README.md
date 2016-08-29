@@ -4,8 +4,8 @@ Service to create aws networks, it responds to *network.create.aws* and will res
 
 ## Build status
 
-* master: [![CircleCI](https://circleci.com/gh/r3labs/network-creator-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/r3labs/network-creator-aws-connector/tree/master)
-* develop: [![CircleCI](https://circleci.com/gh/ErnestIO/network-creator-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/r3labs/network-creator-aws-connector/tree/develop)
+* master: [![CircleCI](https://circleci.com/gh/ErnestIO/network-creator-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/ernestio/network-creator-aws-connector/tree/master)
+* develop: [![CircleCI](https://circleci.com/gh/ErnestIO/network-creator-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/ernestio/network-creator-aws-connector/tree/develop)
 
 ## Installation
 
