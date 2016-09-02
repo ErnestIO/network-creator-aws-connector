@@ -189,6 +189,7 @@ func createNetwork(ev *Event) error {
 			return err
 		}
 
+		// Create Route Table and direct traffic to Internet Gateway
 		rt, err := createRouteTable(svc, ev.DatacenterVPCID, *resp.Subnet.SubnetId)
 		if err != nil {
 			return err
@@ -199,6 +200,16 @@ func createNetwork(ev *Event) error {
 			return err
 		}
 
+		// Modify subnet to assign public IP's on launch
+		mod := ec2.ModifySubnetAttributeInput{
+			SubnetId:            resp.Subnet.SubnetId,
+			MapPublicIpOnLaunch: &ec2.AttributeBooleanValue{Value: aws.Bool(true)},
+		}
+
+		_, err = svc.ModifySubnetAttribute(&mod)
+		if err != nil {
+			return err
+		}
 	}
 
 	ev.NetworkAWSID = *resp.Subnet.SubnetId
