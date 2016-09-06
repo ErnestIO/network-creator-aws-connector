@@ -28,6 +28,7 @@ type Event struct {
 	DatacenterAccessToken string `json:"datacenter_access_token"`
 	NetworkAWSID          string `json:"network_aws_id,omitempty"`
 	NetworkSubnet         string `json:"network_subnet"`
+	NetworkIsPublic       bool   `json:"network_is_public"`
 	ErrorMessage          string `json:"error,omitempty"`
 }
 
