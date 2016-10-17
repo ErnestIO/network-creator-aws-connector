@@ -174,7 +174,7 @@ func createNetwork(ev *Event) error {
 
 	req := ec2.CreateSubnetInput{
 		VpcId:     aws.String(ev.DatacenterVPCID),
-		CidrBlock: aws.String(ev.NetworkSubnet),
+		CidrBlock: aws.String(ev.Subnet),
 	}
 
 	resp, err := svc.CreateSubnet(&req)
@@ -182,7 +182,7 @@ func createNetwork(ev *Event) error {
 		return err
 	}
 
-	if ev.NetworkIsPublic {
+	if ev.IsPublic {
 		// Create Internet Gateway
 		gateway, err := createInternetGateway(svc, ev.DatacenterVPCID)
 		if err != nil {

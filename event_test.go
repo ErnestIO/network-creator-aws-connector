@@ -28,7 +28,7 @@ var (
 		DatacenterAccessKey:   "key",
 		DatacenterAccessToken: "token",
 		NetworkAWSID:          "",
-		NetworkSubnet:         "10.0.0.0/16",
+		Subnet:                "10.0.0.0/16",
 	}
 )
 
@@ -79,7 +79,7 @@ func TestEvent(t *testing.T) {
 					So(e.DatacenterAccessKey, ShouldEqual, "key")
 					So(e.DatacenterAccessToken, ShouldEqual, "token")
 					So(e.NetworkAWSID, ShouldEqual, "")
-					So(e.NetworkSubnet, ShouldEqual, "10.0.0.0/16")
+					So(e.Subnet, ShouldEqual, "10.0.0.0/16")
 				})
 			})
 
@@ -195,7 +195,7 @@ func TestEvent(t *testing.T) {
 
 		Convey("With no network subnet", func() {
 			testEventInvalid := testEvent
-			testEventInvalid.NetworkSubnet = ""
+			testEventInvalid.Subnet = ""
 			invalid, _ := json.Marshal(testEventInvalid)
 
 			Convey("When validating the event", func() {
