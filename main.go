@@ -173,8 +173,9 @@ func createNetwork(ev *Event) error {
 	})
 
 	req := ec2.CreateSubnetInput{
-		VpcId:     aws.String(ev.DatacenterVPCID),
-		CidrBlock: aws.String(ev.Subnet),
+		VpcId:            aws.String(ev.DatacenterVPCID),
+		CidrBlock:        aws.String(ev.Subnet),
+		AvailabilityZone: aws.String(ev.AvailabilityZone),
 	}
 
 	resp, err := svc.CreateSubnet(&req)
@@ -213,6 +214,9 @@ func createNetwork(ev *Event) error {
 	}
 
 	ev.NetworkAWSID = *resp.Subnet.SubnetId
+	if ev.AvailabilityZone == "" {
+		ev.AvailabilityZone = *resp.Subnet.AvailabilityZone
+	}
 
 	return nil
 }
