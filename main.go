@@ -149,8 +149,8 @@ func createRouteTable(svc *ec2.EC2, vpc, subnet string) (*ec2.RouteTable, error)
 
 	return resp.RouteTable, nil
 }
-
 func createGatewayRoutes(svc *ec2.EC2, rt *ec2.RouteTable, gw *ec2.InternetGateway) error {
+
 	req := ec2.CreateRouteInput{
 		RouteTableId:         rt.RouteTableId,
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
@@ -173,7 +173,7 @@ func createNetwork(ev *Event) error {
 	})
 
 	req := ec2.CreateSubnetInput{
-		VpcId:            aws.String(ev.DatacenterVPCID),
+		VpcId:            aws.String(ev.VPCID),
 		CidrBlock:        aws.String(ev.Subnet),
 		AvailabilityZone: aws.String(ev.AvailabilityZone),
 	}
@@ -185,13 +185,13 @@ func createNetwork(ev *Event) error {
 
 	if ev.IsPublic {
 		// Create Internet Gateway
-		gateway, err := createInternetGateway(svc, ev.DatacenterVPCID)
+		gateway, err := createInternetGateway(svc, ev.VPCID)
 		if err != nil {
 			return err
 		}
 
 		// Create Route Table and direct traffic to Internet Gateway
-		rt, err := createRouteTable(svc, ev.DatacenterVPCID, *resp.Subnet.SubnetId)
+		rt, err := createRouteTable(svc, ev.VPCID, *resp.Subnet.SubnetId)
 		if err != nil {
 			return err
 		}
