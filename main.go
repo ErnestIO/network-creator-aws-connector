@@ -150,7 +150,6 @@ func createRouteTable(svc *ec2.EC2, vpc, subnet string) (*ec2.RouteTable, error)
 	return resp.RouteTable, nil
 }
 func createGatewayRoutes(svc *ec2.EC2, rt *ec2.RouteTable, gw *ec2.InternetGateway) error {
-
 	req := ec2.CreateRouteInput{
 		RouteTableId:         rt.RouteTableId,
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
@@ -214,9 +213,7 @@ func createNetwork(ev *Event) error {
 	}
 
 	ev.NetworkAWSID = *resp.Subnet.SubnetId
-	if ev.AvailabilityZone == "" {
-		ev.AvailabilityZone = *resp.Subnet.AvailabilityZone
-	}
+	ev.AvailabilityZone = *resp.Subnet.AvailabilityZone
 
 	return nil
 }
